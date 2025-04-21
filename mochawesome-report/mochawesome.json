@@ -1,0 +1,157 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-04-19T02:21:53.229Z",
+    "end": "2025-04-19T02:22:03.520Z",
+    "duration": 10291,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "04d50ed8-5346-439f-905a-b456802ebd52",
+      "title": "",
+      "fullFile": "C:\\Users\\adlan walid\\Documents\\testmocha\\tests\\sesi-hook\\test-sauce.js",
+      "file": "\\tests\\sesi-hook\\test-sauce.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7fb32909-d0ca-421e-a74d-33436f4c6943",
+          "title": "Google Search Test",
+          "fullFile": "C:\\Users\\adlan walid\\Documents\\testmocha\\tests\\sesi-hook\\test-sauce.js",
+          "file": "\\tests\\sesi-hook\\test-sauce.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Google Search Test\"",
+              "fullTitle": "Google Search Test \"before each\" hook in \"Google Search Test\"",
+              "timedOut": false,
+              "duration": 892,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser('chrome').build();",
+              "err": {},
+              "uuid": "ff707b25-1bfe-48f2-9b33-d217b8e419e7",
+              "parentUUID": "7fb32909-d0ca-421e-a74d-33436f4c6943",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Google Search Test\"",
+              "fullTitle": "Google Search Test \"after each\" hook in \"Google Search Test\"",
+              "timedOut": false,
+              "duration": 48,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();",
+              "err": {},
+              "uuid": "b4028248-849f-4654-9dc5-ef2d1a45f176",
+              "parentUUID": "7fb32909-d0ca-421e-a74d-33436f4c6943",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Visit Saucedemo and sort test with Chrome",
+              "fullTitle": "Google Search Test Visit Saucedemo and sort test with Chrome",
+              "timedOut": false,
+              "duration": 4335,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.get('https://www.saucedemo.com');\nconst title = await driver.getTitle();\nconsole.log(\"ini test case 1\")\n\nassert.strictEqual(title, 'Swag Labs');\nlet inputUsername = await driver.findElement(By.css('[data-test=\"username\"]'))\nlet inputPassword = await driver.findElement(By.xpath('//*[@data-test=\"password\"]'))\nlet buttonLoggin = await driver.findElement(By.className('submit-button btn_action'))\nawait inputUsername.sendKeys('standard_user')\nawait inputPassword.sendKeys('secret_sauce')\nawait buttonLoggin.click()\nlet buttonCart = await driver.wait(\n    until.elementLocated(By.xpath('//*[@data-test=\"shopping-cart-link\"]')),\n    3000\n);\nlet buttonSort = await driver.wait(\nuntil.elementLocated(By.css('[data-test=\"product-sort-container\"]')),\n3000\n);\n// 3. Klik dropdown sort\nawait buttonSort.click();\n// 4. Pilih opsi Z to A (misal option-nya ada value \"za\")\nlet optionZA = await driver.wait(\nuntil.elementLocated(By.css('option[value=\"za\"]')),\n2000\n);\nawait optionZA.click();\n// Ambil semua elemen nama produk\nlet productNames = await driver.findElements(By.css('.inventory_item_name'));\n// Ambil teks dari tiap elemen\nlet names = [];\nfor (let al of productNames) {\nnames.push(await al.getText());\n}\n// Bandingkan dengan versi terurut Z ke A\nlet expected = [...names].sort().reverse();\nconsole.log(\nJSON.stringify(names) === JSON.stringify(expected)\n    ? \"✅ Produk sudah terurut dari Z ke A. \"\n    : \"❌ Urutan produk belum sesuai Z ke A.\"\n);\n    await buttonCart.isDisplayed()\n    await driver.sleep(3000);",
+              "err": {},
+              "uuid": "e5ef6fb6-9cea-4882-927b-00a282cf1b46",
+              "parentUUID": "7fb32909-d0ca-421e-a74d-33436f4c6943",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Visit Saucedemo and add to cart",
+              "fullTitle": "Google Search Test Visit Saucedemo and add to cart",
+              "timedOut": false,
+              "duration": 3960,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.get('https://www.saucedemo.com');\nconst title = await driver.getTitle();\nconsole.log(\"ini test case 2\")\nassert.strictEqual(title, 'Swag Labs');\nlet inputUsername = await driver.findElement(By.css('[data-test=\"username\"]'))\nlet inputPassword = await driver.findElement(By.xpath('//*[@data-test=\"password\"]'))\nlet buttonLoggin = await driver.findElement(By.className('submit-button btn_action'))\nawait inputUsername.sendKeys('standard_user')\nawait inputPassword.sendKeys('secret_sauce')\nawait buttonLoggin.click()\n    \n// Add to cart button\nlet buttonAddToCart = await driver.wait(\nuntil.elementLocated(By.css('[data-test^=\"add-to-cart\"]')),\n5000\n);\nawait buttonAddToCart.click();\n// Verifikasi tombol berubah jadi \"Remove\"\nlet buttonRemove = await driver.findElement(By.css('[data-test^=\"remove\"]'));\nassert.ok(await buttonRemove.isDisplayed(), \"Produk berhasil ditambahkan ke cart\");\n// Klik ikon keranjang\nlet buttonCart = await driver.findElement(By.css('.shopping_cart_link'));\nawait buttonCart.click();\n    await buttonCart.isDisplayed()\n    await driver.sleep(3000);",
+              "err": {},
+              "uuid": "b8e86da5-320a-466d-935d-62cee607f5b3",
+              "parentUUID": "7fb32909-d0ca-421e-a74d-33436f4c6943",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e5ef6fb6-9cea-4882-927b-00a282cf1b46",
+            "b8e86da5-320a-466d-935d-62cee607f5b3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 8295,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 60000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 60000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.8.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
